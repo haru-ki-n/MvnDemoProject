@@ -1,0 +1,34 @@
+create database workdb;
+
+use workdb;
+
+create table divs (
+    id int(11) not null primary key auto_increment,
+    name varchar(255) not null default '',
+    created_at datetime not null default current_timestamp
+    );
+
+insert into divs (id, name, created_at) values
+    (1, '経営企画部', '1990/01/05'),
+    (2, '総務部', '1990/03/01'),
+    (3, '開発部', '1995/08/10'),
+    (4, '営業部', '1996/11/03');
+
+create table users (
+    id int(11) not null primary key auto_increment,
+    name varchar(255) not null default '',
+    belong_to int(11) not null default 0,
+    joined_at datetime not null default current_timestamp,
+    login_at datetime not null default current_timestamp,
+    foreign key (belong_to) references divs(id)
+);
+
+insert into users (id, name, belong_to, joined_at, login_at) values
+    (1, 'satomi', 3, '1995/08/03', '2023/02/10 09:50:43'),
+    (2, 'tanaka', 4, '1999/07/05', '2023/02/09 18:00:05'),
+    (3, 'mike', 1, '1990/12/01', '2023/01/30 13:55:10'),
+    (4, 'nagai', 2, '1995/08/01', '2023/01/30 15:50:43'),
+    (5, 'tomiyama', 2, '2000/05/10', '2023/02/10 10:05:22'),
+    (6, 'sudo', 3, '2022/01/08', '2023/02/05 13:53:00'),
+    (7, 'matsumoto', 1, '2021/03/05', '2023/01/31 10:00:00'),
+    (8, 'sakai', 4, '2021/04/05', '2023/02/10 14:33:05');
